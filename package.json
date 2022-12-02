@@ -1,0 +1,14 @@
+{
+  "name": "@unicrow/contract-types",
+  "description": "Universal Escrow SDK TYPES",
+  "author": "Unicrow Team <hi@unicrow.com>",
+  "version": "0.0.0",
+  "license": "ISC",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "clean": "rm -rf node_modules"
+  }
+}
