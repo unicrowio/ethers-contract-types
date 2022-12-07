@@ -2,7 +2,7 @@
   "name": "@unicrowio/ethers-types",
   "description": "Universal Escrow SDK TYPES",
   "author": "Unicrow Team <hi@unicrowio.com>",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "ISC",
   "types": "./src/index.ts"
 }
