@@ -1,20 +1,20 @@
 {
   "compilerOptions": {
-      "module": "commonjs",
-      "lib": [
-          "es6"
-      ],
-      "noImplicitAny": true,
-      "noImplicitThis": true,
-      "strictFunctionTypes": true,
-      "skipLibCheck": true,
-      "strictNullChecks": true,
-      "declaration": true,
-      "noEmit": false,
-      "forceConsistentCasingInFileNames": true,
-      "outDir": "dist"
+    "strict": false,
+    "declaration": true,
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "declarationDir": "types",
+    "emitDeclarationOnly": false,
+    "target": "es6",
+    "noImplicitAny": true,
+    "removeComments": false,
+    "outDir": "types",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true
   },
-  "include": ["index.d.ts", "src/**/*.ts"],
-  "exclude": ["node_modules", "dist"]
- 
+  "exclude": ["node_modules", "types/**"]
 }

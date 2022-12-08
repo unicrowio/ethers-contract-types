@@ -2,9 +2,10 @@
   "name": "@unicrowio/ethers-types",
   "description": "Universal Escrow SDK TYPES",
   "author": "Unicrow Team <hi@unicrowio.com>",
-  "version": "0.0.4",
+  "version": "0.0.7",
   "license": "ISC",
-  "types": "index.d.ts",
+  "main": "./types/index.js",
+  "types": "./types/index.d.ts",
   "scripts": {
     "build": "tsc -p .",
     "clean": "rimraf dist"
