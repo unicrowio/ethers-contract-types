@@ -2,7 +2,7 @@
   "name": "@unicrowio/ethers-types",
   "description": "Universal Escrow SDK TYPES",
   "author": "Unicrow Team <hi@unicrowio.com>",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "ISC",
   "types": "index.d.ts",
   "scripts": {
@@ -10,8 +10,8 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@ethersproject/abi": "ˆ5.6.4",
-    "@ethersproject/providers": "^5.6.8",
+    "@ethersproject/abi": "5.6.4",
+    "@ethersproject/providers": "5.6.8",
     "ethers": "^5.4.6",
     "@nomiclabs/hardhat-ethers": "^2.2.1"
   },
