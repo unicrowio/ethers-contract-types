@@ -88,7 +88,7 @@ export interface UnicrowClaimInterface extends utils.Interface {
     values: [string]
   ): string;
 
-  decodeFunctionResult(functionFragment: "claimMultiple", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "claim", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "claimMultiple",
     data: BytesLike
@@ -124,20 +124,25 @@ export interface UnicrowClaimInterface extends utils.Interface {
   ): Result;
 
   events: {
-    "ClaimMultiple(tuple[])": EventFragment;
-    "Claim(tuple)": EventFragment;
+    "Claim(string)": EventFragment;
+    "SingleClaim(tuple)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "ClaimMultiple"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Claim"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "SingleClaim"): EventFragment;
 }
 
-export type ClaimEvent = TypedEvent<
+export type Claim_string_Event = TypedEvent<[string], { xyz: string }>;
+
+export type Claim_string_EventFilter = TypedEventFilter<Claim_string_Event>;
+
+export type Claim_tuple_array_Event = TypedEvent<
   [UnicrowClaim.ClaimEventStructOutput[]],
   { escrows: UnicrowClaim.ClaimEventStructOutput[] }
 >;
 
-export type ClaimEventFilter = TypedEventFilter<ClaimEvent>;
+export type Claim_tuple_array_EventFilter =
+  TypedEventFilter<Claim_tuple_array_Event>;
 
 export type SingleClaimEvent = TypedEvent<
   [UnicrowClaim.ClaimEventStructOutput],
@@ -283,11 +288,11 @@ export interface UnicrowClaim extends BaseContract {
   };
 
   filters: {
-    "ClaimMultiple(tuple[])"(escrows?: null): ClaimEventFilter;
-    ClaimMultiple(escrows?: null): ClaimEventFilter;
+    "Claim(string)"(xyz?: null): Claim_string_EventFilter;
+    "Claim(tuple[])"(escrows?: null): Claim_tuple_array_EventFilter;
 
-    "Claim(tuple)"(escrow?: null): SingleClaimEventFilter;
-    Claim(escrow?: null): SingleClaimEventFilter;
+    "SingleClaim(tuple)"(escrow?: null): SingleClaimEventFilter;
+    SingleClaim(escrow?: null): SingleClaimEventFilter;
   };
 
   estimateGas: {

@@ -84,9 +84,9 @@ export type TokenStruct = {
     decimals: BigNumberish;
     symbol: string;
 };
-export type TokenStructOutput = [string, BigNumber, string] & {
+export type TokenStructOutput = [string, number, string] & {
     address_: string;
-    decimals: BigNumber;
+    decimals: number;
     symbol: string;
 };
 export type DataStruct = {
@@ -327,7 +327,7 @@ export interface Unicrow extends BaseContract {
             BigNumberish,
             BigNumberish,
             BigNumberish
-        ], overrides?: CallOverrides): Promise<[[number, number, number, number]]>;
+        ], overrides?: CallOverrides): Promise<[[number, number, number, number, number]]>;
         unicrowArbitrator(overrides?: CallOverrides): Promise<[string]>;
         unicrowClaim(overrides?: CallOverrides): Promise<[string]>;
         unicrowDispute(overrides?: CallOverrides): Promise<[string]>;
@@ -370,7 +370,7 @@ export interface Unicrow extends BaseContract {
         BigNumberish,
         BigNumberish,
         BigNumberish
-    ], overrides?: CallOverrides): Promise<[number, number, number, number]>;
+    ], overrides?: CallOverrides): Promise<[number, number, number, number, number]>;
     unicrowArbitrator(overrides?: CallOverrides): Promise<string>;
     unicrowClaim(overrides?: CallOverrides): Promise<string>;
     unicrowDispute(overrides?: CallOverrides): Promise<string>;
@@ -399,7 +399,7 @@ export interface Unicrow extends BaseContract {
             BigNumberish,
             BigNumberish,
             BigNumberish
-        ], overrides?: CallOverrides): Promise<[number, number, number, number]>;
+        ], overrides?: CallOverrides): Promise<[number, number, number, number, number]>;
         unicrowArbitrator(overrides?: CallOverrides): Promise<string>;
         unicrowClaim(overrides?: CallOverrides): Promise<string>;
         unicrowDispute(overrides?: CallOverrides): Promise<string>;
