@@ -99,9 +99,9 @@ export type TokenStruct = {
   symbol: string;
 };
 
-export type TokenStructOutput = [string, BigNumber, string] & {
+export type TokenStructOutput = [string, number, string] & {
   address_: string;
-  decimals: BigNumber;
+  decimals: number;
   symbol: string;
 };
 
@@ -461,7 +461,7 @@ export interface Unicrow extends BaseContract {
         BigNumberish
       ],
       overrides?: CallOverrides
-    ): Promise<[[number, number, number, number]]>;
+    ): Promise<[[number, number, number, number, number]]>;
 
     unicrowArbitrator(overrides?: CallOverrides): Promise<[string]>;
 
@@ -550,7 +550,7 @@ export interface Unicrow extends BaseContract {
       BigNumberish
     ],
     overrides?: CallOverrides
-  ): Promise<[number, number, number, number]>;
+  ): Promise<[number, number, number, number, number]>;
 
   unicrowArbitrator(overrides?: CallOverrides): Promise<string>;
 
@@ -633,7 +633,7 @@ export interface Unicrow extends BaseContract {
         BigNumberish
       ],
       overrides?: CallOverrides
-    ): Promise<[number, number, number, number]>;
+    ): Promise<[number, number, number, number, number]>;
 
     unicrowArbitrator(overrides?: CallOverrides): Promise<string>;
 

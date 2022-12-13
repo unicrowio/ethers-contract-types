@@ -10,25 +10,12 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "uint256[]",
-        name: "escrows",
-        type: "uint256[]",
-      },
-    ],
-    name: "claim",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
         internalType: "uint256",
         name: "escrowId",
         type: "uint256",
       },
     ],
-    name: "singleClaim",
+    name: "claim",
     outputs: [
       {
         internalType: "uint256[5]",
@@ -36,7 +23,20 @@ const _abi = [
         type: "uint256[5]",
       },
     ],
-    stateMutability: "payable",
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256[]",
+        name: "escrows",
+        type: "uint256[]",
+      },
+    ],
+    name: "claimMultiple",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
   {

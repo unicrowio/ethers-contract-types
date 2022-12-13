@@ -9,7 +9,6 @@ import {
   CallOverrides,
   ContractTransaction,
   Overrides,
-  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -42,10 +41,10 @@ export declare namespace UnicrowClaim {
 export interface UnicrowClaimInterface extends utils.Interface {
   contractName: "UnicrowClaim";
   functions: {
-    "claim(uint256[])": FunctionFragment;
+    "claim(uint256)": FunctionFragment;
+    "claimMultiple(uint256[])": FunctionFragment;
     "crowRewards()": FunctionFragment;
     "protocolFeeAddress()": FunctionFragment;
-    "singleClaim(uint256)": FunctionFragment;
     "stakingRewards()": FunctionFragment;
     "unicrow()": FunctionFragment;
     "unicrowArbitrator()": FunctionFragment;
@@ -54,8 +53,9 @@ export interface UnicrowClaimInterface extends utils.Interface {
     "updateStakingRewards(address)": FunctionFragment;
   };
 
+  encodeFunctionData(functionFragment: "claim", values: [BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: "claim",
+    functionFragment: "claimMultiple",
     values: [BigNumberish[]]
   ): string;
   encodeFunctionData(
@@ -65,10 +65,6 @@ export interface UnicrowClaimInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "protocolFeeAddress",
     values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "singleClaim",
-    values: [BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "stakingRewards",
@@ -92,17 +88,17 @@ export interface UnicrowClaimInterface extends utils.Interface {
     values: [string]
   ): string;
 
-  decodeFunctionResult(functionFragment: "claim", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "claimMultiple", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "claimMultiple",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "crowRewards",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "protocolFeeAddress",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "singleClaim",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -128,12 +124,12 @@ export interface UnicrowClaimInterface extends utils.Interface {
   ): Result;
 
   events: {
-    "Claim(tuple[])": EventFragment;
-    "SingleClaim(tuple)": EventFragment;
+    "ClaimMultiple(tuple[])": EventFragment;
+    "Claim(tuple)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "ClaimMultiple"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Claim"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "SingleClaim"): EventFragment;
 }
 
 export type ClaimEvent = TypedEvent<
@@ -179,18 +175,18 @@ export interface UnicrowClaim extends BaseContract {
 
   functions: {
     claim(
+      escrowId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    claimMultiple(
       escrows: BigNumberish[],
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     crowRewards(overrides?: CallOverrides): Promise<[string]>;
 
     protocolFeeAddress(overrides?: CallOverrides): Promise<[string]>;
-
-    singleClaim(
-      escrowId: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
 
     stakingRewards(overrides?: CallOverrides): Promise<[string]>;
 
@@ -215,18 +211,18 @@ export interface UnicrowClaim extends BaseContract {
   };
 
   claim(
+    escrowId: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  claimMultiple(
     escrows: BigNumberish[],
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   crowRewards(overrides?: CallOverrides): Promise<string>;
 
   protocolFeeAddress(overrides?: CallOverrides): Promise<string>;
-
-  singleClaim(
-    escrowId: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
 
   stakingRewards(overrides?: CallOverrides): Promise<string>;
 
@@ -250,16 +246,19 @@ export interface UnicrowClaim extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    claim(escrows: BigNumberish[], overrides?: CallOverrides): Promise<void>;
+    claim(
+      escrowId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber, BigNumber, BigNumber, BigNumber, BigNumber]>;
+
+    claimMultiple(
+      escrows: BigNumberish[],
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     crowRewards(overrides?: CallOverrides): Promise<string>;
 
     protocolFeeAddress(overrides?: CallOverrides): Promise<string>;
-
-    singleClaim(
-      escrowId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber, BigNumber, BigNumber, BigNumber, BigNumber]>;
 
     stakingRewards(overrides?: CallOverrides): Promise<string>;
 
@@ -284,27 +283,27 @@ export interface UnicrowClaim extends BaseContract {
   };
 
   filters: {
-    "Claim(tuple[])"(escrows?: null): ClaimEventFilter;
-    Claim(escrows?: null): ClaimEventFilter;
+    "ClaimMultiple(tuple[])"(escrows?: null): ClaimEventFilter;
+    ClaimMultiple(escrows?: null): ClaimEventFilter;
 
-    "SingleClaim(tuple)"(escrow?: null): SingleClaimEventFilter;
-    SingleClaim(escrow?: null): SingleClaimEventFilter;
+    "Claim(tuple)"(escrow?: null): SingleClaimEventFilter;
+    Claim(escrow?: null): SingleClaimEventFilter;
   };
 
   estimateGas: {
     claim(
+      escrowId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    claimMultiple(
       escrows: BigNumberish[],
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     crowRewards(overrides?: CallOverrides): Promise<BigNumber>;
 
     protocolFeeAddress(overrides?: CallOverrides): Promise<BigNumber>;
-
-    singleClaim(
-      escrowId: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
 
     stakingRewards(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -330,19 +329,19 @@ export interface UnicrowClaim extends BaseContract {
 
   populateTransaction: {
     claim(
+      escrowId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    claimMultiple(
       escrows: BigNumberish[],
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     crowRewards(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     protocolFeeAddress(
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    singleClaim(
-      escrowId: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     stakingRewards(overrides?: CallOverrides): Promise<PopulatedTransaction>;

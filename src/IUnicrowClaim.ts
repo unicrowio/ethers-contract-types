@@ -9,7 +9,6 @@ import {
   CallOverrides,
   ContractTransaction,
   Overrides,
-  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -21,20 +20,17 @@ import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 export interface IUnicrowClaimInterface extends utils.Interface {
   contractName: "IUnicrowClaim";
   functions: {
-    "claim(uint256[])": FunctionFragment;
-    "singleClaim(uint256)": FunctionFragment;
+    "claim(uint256)": FunctionFragment;
+    "claimMultiple(uint256[])": FunctionFragment;
     "updateCrowRewards(address)": FunctionFragment;
     "updateProtocolFeeAddress(address)": FunctionFragment;
     "updateStakingRewards(address)": FunctionFragment;
   };
 
+  encodeFunctionData(functionFragment: "claim", values: [BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: "claim",
+    functionFragment: "claimMultiple",
     values: [BigNumberish[]]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "singleClaim",
-    values: [BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "updateCrowRewards",
@@ -51,7 +47,7 @@ export interface IUnicrowClaimInterface extends utils.Interface {
 
   decodeFunctionResult(functionFragment: "claim", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "singleClaim",
+    functionFragment: "claimMultiple",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -99,13 +95,13 @@ export interface IUnicrowClaim extends BaseContract {
 
   functions: {
     claim(
-      escrows: BigNumberish[],
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      escrowId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    singleClaim(
-      escrowId: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    claimMultiple(
+      escrows: BigNumberish[],
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     updateCrowRewards(
@@ -125,13 +121,13 @@ export interface IUnicrowClaim extends BaseContract {
   };
 
   claim(
-    escrows: BigNumberish[],
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    escrowId: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  singleClaim(
-    escrowId: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+  claimMultiple(
+    escrows: BigNumberish[],
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   updateCrowRewards(
@@ -150,12 +146,15 @@ export interface IUnicrowClaim extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    claim(escrows: BigNumberish[], overrides?: CallOverrides): Promise<void>;
-
-    singleClaim(
+    claim(
       escrowId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber, BigNumber, BigNumber, BigNumber, BigNumber]>;
+
+    claimMultiple(
+      escrows: BigNumberish[],
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     updateCrowRewards(
       crowRewards_: string,
@@ -177,13 +176,13 @@ export interface IUnicrowClaim extends BaseContract {
 
   estimateGas: {
     claim(
-      escrows: BigNumberish[],
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      escrowId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    singleClaim(
-      escrowId: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    claimMultiple(
+      escrows: BigNumberish[],
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     updateCrowRewards(
@@ -204,13 +203,13 @@ export interface IUnicrowClaim extends BaseContract {
 
   populateTransaction: {
     claim(
-      escrows: BigNumberish[],
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      escrowId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    singleClaim(
-      escrowId: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    claimMultiple(
+      escrows: BigNumberish[],
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     updateCrowRewards(
