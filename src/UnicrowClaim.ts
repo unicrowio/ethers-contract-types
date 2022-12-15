@@ -124,27 +124,27 @@ export interface UnicrowClaimInterface extends utils.Interface {
   ): Result;
 
   events: {
-    "Claim(tuple[])": EventFragment;
-    "SingleClaim(tuple)": EventFragment;
+    "Claim(tuple)": EventFragment;
+    "ClaimMultiple(tuple[])": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "Claim"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "SingleClaim"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ClaimMultiple"): EventFragment;
 }
 
 export type ClaimEvent = TypedEvent<
-  [UnicrowClaim.ClaimEventStructOutput[]],
-  { escrows: UnicrowClaim.ClaimEventStructOutput[] }
->;
-
-export type ClaimEventFilter = TypedEventFilter<ClaimEvent>;
-
-export type SingleClaimEvent = TypedEvent<
   [UnicrowClaim.ClaimEventStructOutput],
   { escrow: UnicrowClaim.ClaimEventStructOutput }
 >;
 
-export type SingleClaimEventFilter = TypedEventFilter<SingleClaimEvent>;
+export type ClaimEventFilter = TypedEventFilter<ClaimEvent>;
+
+export type ClaimMultipleEvent = TypedEvent<
+  [UnicrowClaim.ClaimEventStructOutput[]],
+  { escrows: UnicrowClaim.ClaimEventStructOutput[] }
+>;
+
+export type ClaimMultipleEventFilter = TypedEventFilter<ClaimMultipleEvent>;
 
 export interface UnicrowClaim extends BaseContract {
   contractName: "UnicrowClaim";
@@ -283,11 +283,11 @@ export interface UnicrowClaim extends BaseContract {
   };
 
   filters: {
-    "Claim(tuple[])"(escrows?: null): ClaimEventFilter;
-    Claim(escrows?: null): ClaimEventFilter;
+    "Claim(tuple)"(escrow?: null): ClaimEventFilter;
+    Claim(escrow?: null): ClaimEventFilter;
 
-    "SingleClaim(tuple)"(escrow?: null): SingleClaimEventFilter;
-    SingleClaim(escrow?: null): SingleClaimEventFilter;
+    "ClaimMultiple(tuple[])"(escrows?: null): ClaimMultipleEventFilter;
+    ClaimMultiple(escrows?: null): ClaimMultipleEventFilter;
   };
 
   estimateGas: {
