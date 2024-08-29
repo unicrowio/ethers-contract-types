@@ -83,6 +83,10 @@ export declare class IUnicrow__factory {
                 readonly internalType: "uint256";
                 readonly name: "amount";
                 readonly type: "uint256";
+            }, {
+                readonly internalType: "string";
+                readonly name: "paymentReference";
+                readonly type: "string";
             }];
             readonly internalType: "struct Escrow";
             readonly name: "";
@@ -120,6 +124,10 @@ export declare class IUnicrow__factory {
                 readonly internalType: "uint256";
                 readonly name: "amount";
                 readonly type: "uint256";
+            }, {
+                readonly internalType: "string";
+                readonly name: "paymentReference";
+                readonly type: "string";
             }];
             readonly internalType: "struct EscrowInput";
             readonly name: "input";
@@ -134,7 +142,11 @@ export declare class IUnicrow__factory {
             readonly type: "uint16";
         }];
         readonly name: "pay";
-        readonly outputs: readonly [];
+        readonly outputs: readonly [{
+            readonly internalType: "uint256";
+            readonly name: "";
+            readonly type: "uint256";
+        }];
         readonly stateMutability: "payable";
         readonly type: "function";
     }, {

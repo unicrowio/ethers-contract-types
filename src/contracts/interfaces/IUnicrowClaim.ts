@@ -69,9 +69,8 @@ export interface IUnicrowClaimInterface extends Interface {
 }
 
 export interface IUnicrowClaim extends BaseContract {
-  connect(runner?: ContractRunner | null): BaseContract;
-  attach(addressOrName: AddressLike): this;
-  deployed(): Promise<this>;
+  connect(runner?: ContractRunner | null): IUnicrowClaim;
+  waitForDeployment(): Promise<this>;
 
   interface: IUnicrowClaimInterface;
 

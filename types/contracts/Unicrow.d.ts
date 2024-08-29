@@ -13,6 +13,7 @@ export type EscrowStruct = {
     consensus: [BigNumberish, BigNumberish];
     split: [BigNumberish, BigNumberish, BigNumberish, BigNumberish];
     amount: BigNumberish;
+    paymentReference: string;
 };
 export type EscrowStructOutput = [
     buyer: string,
@@ -26,7 +27,8 @@ export type EscrowStructOutput = [
     claimed: bigint,
     consensus: [bigint, bigint],
     split: [bigint, bigint, bigint, bigint],
-    amount: bigint
+    amount: bigint,
+    paymentReference: string
 ] & {
     buyer: string;
     challengeExtension: bigint;
@@ -40,6 +42,7 @@ export type EscrowStructOutput = [
     consensus: [bigint, bigint];
     split: [bigint, bigint, bigint, bigint];
     amount: bigint;
+    paymentReference: string;
 };
 export type ArbitratorStruct = {
     arbitrator: AddressLike;
@@ -111,6 +114,7 @@ export type EscrowInputStruct = {
     challengePeriod: BigNumberish;
     challengeExtension: BigNumberish;
     amount: BigNumberish;
+    paymentReference: string;
 };
 export type EscrowInputStructOutput = [
     seller: string,
@@ -119,7 +123,8 @@ export type EscrowInputStructOutput = [
     currency: string,
     challengePeriod: bigint,
     challengeExtension: bigint,
-    amount: bigint
+    amount: bigint,
+    paymentReference: string
 ] & {
     seller: string;
     marketplace: string;
@@ -128,6 +133,7 @@ export type EscrowInputStructOutput = [
     challengePeriod: bigint;
     challengeExtension: bigint;
     amount: bigint;
+    paymentReference: string;
 };
 export interface UnicrowInterface extends Interface {
     getFunction(nameOrSignature: "challenge" | "escrowIdCounter" | "getAllEscrowData" | "getEscrow" | "governanceAddress" | "pay" | "protocolFee" | "refund" | "release" | "sendEscrowShare" | "setClaimed" | "settle" | "splitCalculation" | "unicrowArbitrator" | "unicrowClaim" | "unicrowDispute" | "updateEscrowFee" | "updateGovernance"): FunctionFragment;
@@ -285,9 +291,8 @@ export declare namespace ReleaseEvent {
     type LogDescription = TypedLogDescription<Event>;
 }
 export interface Unicrow extends BaseContract {
-    connect(runner?: ContractRunner | null): BaseContract;
-    attach(addressOrName: AddressLike): this;
-    deployed(): Promise<this>;
+    connect(runner?: ContractRunner | null): Unicrow;
+    waitForDeployment(): Promise<this>;
     interface: UnicrowInterface;
     queryFilter<TCEvent extends TypedContractEvent>(event: TCEvent, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TypedEventLog<TCEvent>>>;
     queryFilter<TCEvent extends TypedContractEvent>(filter: TypedDeferredTopicFilter<TCEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TypedEventLog<TCEvent>>>;
@@ -324,7 +329,7 @@ export interface Unicrow extends BaseContract {
         arbitrator: AddressLike,
         arbitratorFee: BigNumberish
     ], [
-        void
+        bigint
     ], "payable">;
     protocolFee: TypedContractMethod<[], [bigint], "view">;
     refund: TypedContractMethod<[escrowId: BigNumberish], [void], "nonpayable">;
@@ -395,7 +400,7 @@ export interface Unicrow extends BaseContract {
         arbitrator: AddressLike,
         arbitratorFee: BigNumberish
     ], [
-        void
+        bigint
     ], "payable">;
     getFunction(nameOrSignature: "protocolFee"): TypedContractMethod<[], [bigint], "view">;
     getFunction(nameOrSignature: "refund"): TypedContractMethod<[escrowId: BigNumberish], [void], "nonpayable">;

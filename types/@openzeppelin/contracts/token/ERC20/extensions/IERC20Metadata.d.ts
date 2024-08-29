@@ -57,9 +57,8 @@ export declare namespace TransferEvent {
     type LogDescription = TypedLogDescription<Event>;
 }
 export interface IERC20Metadata extends BaseContract {
-    connect(runner?: ContractRunner | null): BaseContract;
-    attach(addressOrName: AddressLike): this;
-    deployed(): Promise<this>;
+    connect(runner?: ContractRunner | null): IERC20Metadata;
+    waitForDeployment(): Promise<this>;
     interface: IERC20MetadataInterface;
     queryFilter<TCEvent extends TypedContractEvent>(event: TCEvent, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TypedEventLog<TCEvent>>>;
     queryFilter<TCEvent extends TypedContractEvent>(filter: TypedDeferredTopicFilter<TCEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TypedEventLog<TCEvent>>>;

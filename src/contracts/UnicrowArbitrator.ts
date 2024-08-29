@@ -36,6 +36,7 @@ export type EscrowStruct = {
   consensus: [BigNumberish, BigNumberish];
   split: [BigNumberish, BigNumberish, BigNumberish, BigNumberish];
   amount: BigNumberish;
+  paymentReference: string;
 };
 
 export type EscrowStructOutput = [
@@ -50,7 +51,8 @@ export type EscrowStructOutput = [
   claimed: bigint,
   consensus: [bigint, bigint],
   split: [bigint, bigint, bigint, bigint],
-  amount: bigint
+  amount: bigint,
+  paymentReference: string
 ] & {
   buyer: string;
   challengeExtension: bigint;
@@ -64,6 +66,7 @@ export type EscrowStructOutput = [
   consensus: [bigint, bigint];
   split: [bigint, bigint, bigint, bigint];
   amount: bigint;
+  paymentReference: string;
 };
 
 export type ArbitratorStruct = {
@@ -256,9 +259,8 @@ export namespace ArbitratorProposedEvent {
 }
 
 export interface UnicrowArbitrator extends BaseContract {
-  connect(runner?: ContractRunner | null): BaseContract;
-  attach(addressOrName: AddressLike): this;
-  deployed(): Promise<this>;
+  connect(runner?: ContractRunner | null): UnicrowArbitrator;
+  waitForDeployment(): Promise<this>;
 
   interface: UnicrowArbitratorInterface;
 
@@ -311,7 +313,7 @@ export interface UnicrowArbitrator extends BaseContract {
 
   arbitrate: TypedContractMethod<
     [escrowId: BigNumberish, newSplit: [BigNumberish, BigNumberish]],
-    [void],
+    [[bigint, bigint, bigint, bigint, bigint]],
     "nonpayable"
   >;
 
@@ -392,7 +394,7 @@ export interface UnicrowArbitrator extends BaseContract {
     nameOrSignature: "arbitrate"
   ): TypedContractMethod<
     [escrowId: BigNumberish, newSplit: [BigNumberish, BigNumberish]],
-    [void],
+    [[bigint, bigint, bigint, bigint, bigint]],
     "nonpayable"
   >;
   getFunction(

@@ -139,9 +139,8 @@ export namespace TransferEvent {
 }
 
 export interface FakeToken extends BaseContract {
-  connect(runner?: ContractRunner | null): BaseContract;
-  attach(addressOrName: AddressLike): this;
-  deployed(): Promise<this>;
+  connect(runner?: ContractRunner | null): FakeToken;
+  waitForDeployment(): Promise<this>;
 
   interface: FakeTokenInterface;
 

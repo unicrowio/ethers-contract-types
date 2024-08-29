@@ -61,9 +61,8 @@ export declare namespace TransferEvent {
     type LogDescription = TypedLogDescription<Event>;
 }
 export interface FakeToken extends BaseContract {
-    connect(runner?: ContractRunner | null): BaseContract;
-    attach(addressOrName: AddressLike): this;
-    deployed(): Promise<this>;
+    connect(runner?: ContractRunner | null): FakeToken;
+    waitForDeployment(): Promise<this>;
     interface: FakeTokenInterface;
     queryFilter<TCEvent extends TypedContractEvent>(event: TCEvent, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TypedEventLog<TCEvent>>>;
     queryFilter<TCEvent extends TypedContractEvent>(filter: TypedDeferredTopicFilter<TCEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TypedEventLog<TCEvent>>>;

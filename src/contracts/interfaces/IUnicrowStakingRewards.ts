@@ -33,9 +33,8 @@ export interface IUnicrowStakingRewardsInterface extends Interface {
 }
 
 export interface IUnicrowStakingRewards extends BaseContract {
-  connect(runner?: ContractRunner | null): BaseContract;
-  attach(addressOrName: AddressLike): this;
-  deployed(): Promise<this>;
+  connect(runner?: ContractRunner | null): IUnicrowStakingRewards;
+  waitForDeployment(): Promise<this>;
 
   interface: IUnicrowStakingRewardsInterface;
 

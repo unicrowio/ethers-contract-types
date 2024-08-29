@@ -121,9 +121,8 @@ export namespace TransferEvent {
 }
 
 export interface IERC20Metadata extends BaseContract {
-  connect(runner?: ContractRunner | null): BaseContract;
-  attach(addressOrName: AddressLike): this;
-  deployed(): Promise<this>;
+  connect(runner?: ContractRunner | null): IERC20Metadata;
+  waitForDeployment(): Promise<this>;
 
   interface: IERC20MetadataInterface;
 

@@ -30,7 +30,11 @@ export declare class IUnicrowArbitrator__factory {
             readonly type: "uint16[2]";
         }];
         readonly name: "arbitrate";
-        readonly outputs: readonly [];
+        readonly outputs: readonly [{
+            readonly internalType: "uint256[5]";
+            readonly name: "";
+            readonly type: "uint256[5]";
+        }];
         readonly stateMutability: "nonpayable";
         readonly type: "function";
     }, {

@@ -34,9 +34,8 @@ export interface IUnicrowArbitratorInterface extends Interface {
     decodeFunctionResult(functionFragment: "setArbitrator", data: BytesLike): Result;
 }
 export interface IUnicrowArbitrator extends BaseContract {
-    connect(runner?: ContractRunner | null): BaseContract;
-    attach(addressOrName: AddressLike): this;
-    deployed(): Promise<this>;
+    connect(runner?: ContractRunner | null): IUnicrowArbitrator;
+    waitForDeployment(): Promise<this>;
     interface: IUnicrowArbitratorInterface;
     queryFilter<TCEvent extends TypedContractEvent>(event: TCEvent, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TypedEventLog<TCEvent>>>;
     queryFilter<TCEvent extends TypedContractEvent>(filter: TypedDeferredTopicFilter<TCEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TypedEventLog<TCEvent>>>;
@@ -58,7 +57,7 @@ export interface IUnicrowArbitrator extends BaseContract {
         escrowId: BigNumberish,
         newSplit: [BigNumberish, BigNumberish]
     ], [
-        void
+        [bigint, bigint, bigint, bigint, bigint]
     ], "nonpayable">;
     getArbitratorData: TypedContractMethod<[
         escrowId: BigNumberish
@@ -91,7 +90,7 @@ export interface IUnicrowArbitrator extends BaseContract {
         escrowId: BigNumberish,
         newSplit: [BigNumberish, BigNumberish]
     ], [
-        void
+        [bigint, bigint, bigint, bigint, bigint]
     ], "nonpayable">;
     getFunction(nameOrSignature: "getArbitratorData"): TypedContractMethod<[
         escrowId: BigNumberish

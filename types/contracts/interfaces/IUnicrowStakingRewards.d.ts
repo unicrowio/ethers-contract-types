@@ -6,9 +6,8 @@ export interface IUnicrowStakingRewardsInterface extends Interface {
     decodeFunctionResult(functionFragment: "collectFee", data: BytesLike): Result;
 }
 export interface IUnicrowStakingRewards extends BaseContract {
-    connect(runner?: ContractRunner | null): BaseContract;
-    attach(addressOrName: AddressLike): this;
-    deployed(): Promise<this>;
+    connect(runner?: ContractRunner | null): IUnicrowStakingRewards;
+    waitForDeployment(): Promise<this>;
     interface: IUnicrowStakingRewardsInterface;
     queryFilter<TCEvent extends TypedContractEvent>(event: TCEvent, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TypedEventLog<TCEvent>>>;
     queryFilter<TCEvent extends TypedContractEvent>(filter: TypedDeferredTopicFilter<TCEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TypedEventLog<TCEvent>>>;

@@ -46,7 +46,13 @@ const _abi = [
       },
     ],
     name: "arbitrate",
-    outputs: [],
+    outputs: [
+      {
+        internalType: "uint256[5]",
+        name: "",
+        type: "uint256[5]",
+      },
+    ],
     stateMutability: "nonpayable",
     type: "function",
   },

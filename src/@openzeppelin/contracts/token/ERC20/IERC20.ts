@@ -112,9 +112,8 @@ export namespace TransferEvent {
 }
 
 export interface IERC20 extends BaseContract {
-  connect(runner?: ContractRunner | null): BaseContract;
-  attach(addressOrName: AddressLike): this;
-  deployed(): Promise<this>;
+  connect(runner?: ContractRunner | null): IERC20;
+  waitForDeployment(): Promise<this>;
 
   interface: IERC20Interface;
 

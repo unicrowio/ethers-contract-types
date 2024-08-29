@@ -14,9 +14,8 @@ export interface IUnicrowClaimInterface extends Interface {
     decodeFunctionResult(functionFragment: "updateStakingRewards", data: BytesLike): Result;
 }
 export interface IUnicrowClaim extends BaseContract {
-    connect(runner?: ContractRunner | null): BaseContract;
-    attach(addressOrName: AddressLike): this;
-    deployed(): Promise<this>;
+    connect(runner?: ContractRunner | null): IUnicrowClaim;
+    waitForDeployment(): Promise<this>;
     interface: IUnicrowClaimInterface;
     queryFilter<TCEvent extends TypedContractEvent>(event: TCEvent, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TypedEventLog<TCEvent>>>;
     queryFilter<TCEvent extends TypedContractEvent>(filter: TypedDeferredTopicFilter<TCEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TypedEventLog<TCEvent>>>;

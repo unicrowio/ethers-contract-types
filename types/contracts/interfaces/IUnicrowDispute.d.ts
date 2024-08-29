@@ -1,4 +1,4 @@
-import type { BaseContract, BigNumberish, BytesLike, FunctionFragment, Result, Interface, AddressLike, ContractRunner, ContractMethod, Listener } from "ethers";
+import type { BaseContract, BigNumberish, BytesLike, FunctionFragment, Result, Interface, ContractRunner, ContractMethod, Listener } from "ethers";
 import type { TypedContractEvent, TypedDeferredTopicFilter, TypedEventLog, TypedListener, TypedContractMethod } from "../../common";
 export interface IUnicrowDisputeInterface extends Interface {
     getFunction(nameOrSignature: "approveSettlement" | "challenge" | "offerSettlement"): FunctionFragment;
@@ -10,9 +10,8 @@ export interface IUnicrowDisputeInterface extends Interface {
     decodeFunctionResult(functionFragment: "offerSettlement", data: BytesLike): Result;
 }
 export interface IUnicrowDispute extends BaseContract {
-    connect(runner?: ContractRunner | null): BaseContract;
-    attach(addressOrName: AddressLike): this;
-    deployed(): Promise<this>;
+    connect(runner?: ContractRunner | null): IUnicrowDispute;
+    waitForDeployment(): Promise<this>;
     interface: IUnicrowDisputeInterface;
     queryFilter<TCEvent extends TypedContractEvent>(event: TCEvent, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TypedEventLog<TCEvent>>>;
     queryFilter<TCEvent extends TypedContractEvent>(filter: TypedDeferredTopicFilter<TCEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TypedEventLog<TCEvent>>>;

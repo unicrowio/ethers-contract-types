@@ -154,9 +154,8 @@ export namespace ClaimMultipleEvent {
 }
 
 export interface UnicrowClaim extends BaseContract {
-  connect(runner?: ContractRunner | null): BaseContract;
-  attach(addressOrName: AddressLike): this;
-  deployed(): Promise<this>;
+  connect(runner?: ContractRunner | null): UnicrowClaim;
+  waitForDeployment(): Promise<this>;
 
   interface: UnicrowClaimInterface;
 

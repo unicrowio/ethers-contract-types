@@ -94,9 +94,8 @@ export interface IUnicrowArbitratorInterface extends Interface {
 }
 
 export interface IUnicrowArbitrator extends BaseContract {
-  connect(runner?: ContractRunner | null): BaseContract;
-  attach(addressOrName: AddressLike): this;
-  deployed(): Promise<this>;
+  connect(runner?: ContractRunner | null): IUnicrowArbitrator;
+  waitForDeployment(): Promise<this>;
 
   interface: IUnicrowArbitratorInterface;
 
@@ -149,7 +148,7 @@ export interface IUnicrowArbitrator extends BaseContract {
 
   arbitrate: TypedContractMethod<
     [escrowId: BigNumberish, newSplit: [BigNumberish, BigNumberish]],
-    [void],
+    [[bigint, bigint, bigint, bigint, bigint]],
     "nonpayable"
   >;
 
@@ -198,7 +197,7 @@ export interface IUnicrowArbitrator extends BaseContract {
     nameOrSignature: "arbitrate"
   ): TypedContractMethod<
     [escrowId: BigNumberish, newSplit: [BigNumberish, BigNumberish]],
-    [void],
+    [[bigint, bigint, bigint, bigint, bigint]],
     "nonpayable"
   >;
   getFunction(

@@ -36,6 +36,7 @@ export type EscrowStruct = {
   consensus: [BigNumberish, BigNumberish];
   split: [BigNumberish, BigNumberish, BigNumberish, BigNumberish];
   amount: BigNumberish;
+  paymentReference: string;
 };
 
 export type EscrowStructOutput = [
@@ -50,7 +51,8 @@ export type EscrowStructOutput = [
   claimed: bigint,
   consensus: [bigint, bigint],
   split: [bigint, bigint, bigint, bigint],
-  amount: bigint
+  amount: bigint,
+  paymentReference: string
 ] & {
   buyer: string;
   challengeExtension: bigint;
@@ -64,6 +66,7 @@ export type EscrowStructOutput = [
   consensus: [bigint, bigint];
   split: [bigint, bigint, bigint, bigint];
   amount: bigint;
+  paymentReference: string;
 };
 
 export type ArbitratorStruct = {
@@ -140,6 +143,7 @@ export type EscrowInputStruct = {
   challengePeriod: BigNumberish;
   challengeExtension: BigNumberish;
   amount: BigNumberish;
+  paymentReference: string;
 };
 
 export type EscrowInputStructOutput = [
@@ -149,7 +153,8 @@ export type EscrowInputStructOutput = [
   currency: string,
   challengePeriod: bigint,
   challengeExtension: bigint,
-  amount: bigint
+  amount: bigint,
+  paymentReference: string
 ] & {
   seller: string;
   marketplace: string;
@@ -158,6 +163,7 @@ export type EscrowInputStructOutput = [
   challengePeriod: bigint;
   challengeExtension: bigint;
   amount: bigint;
+  paymentReference: string;
 };
 
 export interface UnicrowInterface extends Interface {
@@ -408,9 +414,8 @@ export namespace ReleaseEvent {
 }
 
 export interface Unicrow extends BaseContract {
-  connect(runner?: ContractRunner | null): BaseContract;
-  attach(addressOrName: AddressLike): this;
-  deployed(): Promise<this>;
+  connect(runner?: ContractRunner | null): Unicrow;
+  waitForDeployment(): Promise<this>;
 
   interface: UnicrowInterface;
 
@@ -485,7 +490,7 @@ export interface Unicrow extends BaseContract {
       arbitrator: AddressLike,
       arbitratorFee: BigNumberish
     ],
-    [void],
+    [bigint],
     "payable"
   >;
 
@@ -590,7 +595,7 @@ export interface Unicrow extends BaseContract {
       arbitrator: AddressLike,
       arbitratorFee: BigNumberish
     ],
-    [void],
+    [bigint],
     "payable"
   >;
   getFunction(

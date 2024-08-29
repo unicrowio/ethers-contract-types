@@ -111,6 +111,11 @@ const _abi = [
                         name: "amount",
                         type: "uint256",
                     },
+                    {
+                        internalType: "string",
+                        name: "paymentReference",
+                        type: "string",
+                    },
                 ],
                 internalType: "struct Escrow",
                 name: "",
@@ -159,6 +164,11 @@ const _abi = [
                         name: "amount",
                         type: "uint256",
                     },
+                    {
+                        internalType: "string",
+                        name: "paymentReference",
+                        type: "string",
+                    },
                 ],
                 internalType: "struct EscrowInput",
                 name: "input",
@@ -176,7 +186,13 @@ const _abi = [
             },
         ],
         name: "pay",
-        outputs: [],
+        outputs: [
+            {
+                internalType: "uint256",
+                name: "",
+                type: "uint256",
+            },
+        ],
         stateMutability: "payable",
         type: "function",
     },

@@ -13,6 +13,7 @@ export type EscrowStruct = {
     consensus: [BigNumberish, BigNumberish];
     split: [BigNumberish, BigNumberish, BigNumberish, BigNumberish];
     amount: BigNumberish;
+    paymentReference: string;
 };
 export type EscrowStructOutput = [
     buyer: string,
@@ -26,7 +27,8 @@ export type EscrowStructOutput = [
     claimed: bigint,
     consensus: [bigint, bigint],
     split: [bigint, bigint, bigint, bigint],
-    amount: bigint
+    amount: bigint,
+    paymentReference: string
 ] & {
     buyer: string;
     challengeExtension: bigint;
@@ -40,6 +42,7 @@ export type EscrowStructOutput = [
     consensus: [bigint, bigint];
     split: [bigint, bigint, bigint, bigint];
     amount: bigint;
+    paymentReference: string;
 };
 export type ArbitratorStruct = {
     arbitrator: AddressLike;
@@ -167,9 +170,8 @@ export declare namespace ArbitratorProposedEvent {
     type LogDescription = TypedLogDescription<Event>;
 }
 export interface UnicrowArbitrator extends BaseContract {
-    connect(runner?: ContractRunner | null): BaseContract;
-    attach(addressOrName: AddressLike): this;
-    deployed(): Promise<this>;
+    connect(runner?: ContractRunner | null): UnicrowArbitrator;
+    waitForDeployment(): Promise<this>;
     interface: UnicrowArbitratorInterface;
     queryFilter<TCEvent extends TypedContractEvent>(event: TCEvent, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TypedEventLog<TCEvent>>>;
     queryFilter<TCEvent extends TypedContractEvent>(filter: TypedDeferredTopicFilter<TCEvent>, fromBlockOrBlockhash?: string | number | undefined, toBlock?: string | number | undefined): Promise<Array<TypedEventLog<TCEvent>>>;
@@ -191,7 +193,7 @@ export interface UnicrowArbitrator extends BaseContract {
         escrowId: BigNumberish,
         newSplit: [BigNumberish, BigNumberish]
     ], [
-        void
+        [bigint, bigint, bigint, bigint, bigint]
     ], "nonpayable">;
     arbitrationCalculation: TypedContractMethod<[
         currentSplit: [
@@ -254,7 +256,7 @@ export interface UnicrowArbitrator extends BaseContract {
         escrowId: BigNumberish,
         newSplit: [BigNumberish, BigNumberish]
     ], [
-        void
+        [bigint, bigint, bigint, bigint, bigint]
     ], "nonpayable">;
     getFunction(nameOrSignature: "arbitrationCalculation"): TypedContractMethod<[
         currentSplit: [
