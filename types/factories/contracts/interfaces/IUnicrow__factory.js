@@ -131,6 +131,11 @@ const _abi = [
                 components: [
                     {
                         internalType: "address",
+                        name: "buyer",
+                        type: "address",
+                    },
+                    {
+                        internalType: "address",
                         name: "seller",
                         type: "address",
                     },

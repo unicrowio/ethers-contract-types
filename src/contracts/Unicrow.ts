@@ -136,6 +136,7 @@ export type DataStructOutput = [
 };
 
 export type EscrowInputStruct = {
+  buyer: AddressLike;
   seller: AddressLike;
   marketplace: AddressLike;
   marketplaceFee: BigNumberish;
@@ -147,6 +148,7 @@ export type EscrowInputStruct = {
 };
 
 export type EscrowInputStructOutput = [
+  buyer: string,
   seller: string,
   marketplace: string,
   marketplaceFee: bigint,
@@ -156,6 +158,7 @@ export type EscrowInputStructOutput = [
   amount: bigint,
   paymentReference: string
 ] & {
+  buyer: string;
   seller: string;
   marketplace: string;
   marketplaceFee: bigint;
