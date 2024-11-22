@@ -94,7 +94,7 @@ export interface IUnicrowInterface extends Interface {
         BigNumberish
     ]): string;
     encodeFunctionData(functionFragment: "getEscrow", values: [BigNumberish]): string;
-    encodeFunctionData(functionFragment: "pay", values: [EscrowInputStruct, AddressLike, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "pay", values: [AddressLike, EscrowInputStruct, AddressLike, BigNumberish]): string;
     encodeFunctionData(functionFragment: "refund", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "release", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "setClaimed", values: [BigNumberish]): string;
@@ -161,6 +161,7 @@ export interface IUnicrow extends BaseContract {
         EscrowStructOutput
     ], "nonpayable">;
     pay: TypedContractMethod<[
+        sender: AddressLike,
         input: EscrowInputStruct,
         arbitrator: AddressLike,
         arbitratorFee: BigNumberish
@@ -218,6 +219,7 @@ export interface IUnicrow extends BaseContract {
         EscrowStructOutput
     ], "nonpayable">;
     getFunction(nameOrSignature: "pay"): TypedContractMethod<[
+        sender: AddressLike,
         input: EscrowInputStruct,
         arbitrator: AddressLike,
         arbitratorFee: BigNumberish

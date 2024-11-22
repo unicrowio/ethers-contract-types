@@ -222,7 +222,7 @@ export interface UnicrowInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "pay",
-    values: [EscrowInputStruct, AddressLike, BigNumberish]
+    values: [AddressLike, EscrowInputStruct, AddressLike, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "protocolFee",
@@ -489,6 +489,7 @@ export interface Unicrow extends BaseContract {
 
   pay: TypedContractMethod<
     [
+      sender: AddressLike,
       input: EscrowInputStruct,
       arbitrator: AddressLike,
       arbitratorFee: BigNumberish
@@ -594,6 +595,7 @@ export interface Unicrow extends BaseContract {
     nameOrSignature: "pay"
   ): TypedContractMethod<
     [
+      sender: AddressLike,
       input: EscrowInputStruct,
       arbitrator: AddressLike,
       arbitratorFee: BigNumberish

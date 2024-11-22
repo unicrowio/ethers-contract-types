@@ -160,7 +160,7 @@ export interface UnicrowInterface extends Interface {
     encodeFunctionData(functionFragment: "getAllEscrowData", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "getEscrow", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "governanceAddress", values?: undefined): string;
-    encodeFunctionData(functionFragment: "pay", values: [EscrowInputStruct, AddressLike, BigNumberish]): string;
+    encodeFunctionData(functionFragment: "pay", values: [AddressLike, EscrowInputStruct, AddressLike, BigNumberish]): string;
     encodeFunctionData(functionFragment: "protocolFee", values?: undefined): string;
     encodeFunctionData(functionFragment: "refund", values: [BigNumberish]): string;
     encodeFunctionData(functionFragment: "release", values: [BigNumberish]): string;
@@ -328,6 +328,7 @@ export interface Unicrow extends BaseContract {
     ], "view">;
     governanceAddress: TypedContractMethod<[], [string], "view">;
     pay: TypedContractMethod<[
+        sender: AddressLike,
         input: EscrowInputStruct,
         arbitrator: AddressLike,
         arbitratorFee: BigNumberish
@@ -399,6 +400,7 @@ export interface Unicrow extends BaseContract {
     ], "view">;
     getFunction(nameOrSignature: "governanceAddress"): TypedContractMethod<[], [string], "view">;
     getFunction(nameOrSignature: "pay"): TypedContractMethod<[
+        sender: AddressLike,
         input: EscrowInputStruct,
         arbitrator: AddressLike,
         arbitratorFee: BigNumberish

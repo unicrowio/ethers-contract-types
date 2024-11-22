@@ -96,6 +96,10 @@ export declare class IUnicrow__factory {
         readonly type: "function";
     }, {
         readonly inputs: readonly [{
+            readonly internalType: "address";
+            readonly name: "sender";
+            readonly type: "address";
+        }, {
             readonly components: readonly [{
                 readonly internalType: "address";
                 readonly name: "buyer";
