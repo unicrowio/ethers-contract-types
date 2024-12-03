@@ -2,7 +2,7 @@
   "name": "@unicrowio/ethers-types",
   "description": "Unicrow SDK TYPES",
   "author": "Unicrow Team <hello@unicrow.io>",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "license": "ISC",
   "main": "./types/index.js",
   "types": "./types/index.d.ts",
